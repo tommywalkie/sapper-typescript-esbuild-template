@@ -19,12 +19,12 @@ const mode = process.env.NODE_ENV
 const dev = mode === 'development'
 const sourcemap = dev ? 'inline' : false
 
-const optimizer = () => esbuild({
+const optimizer = isServer => esbuild({
     include: /\.[jt]sx?$/,
-    minify: true,
-    minifyWhitespace: true,
-    minifyIdentifiers: true,
-    minifySyntax: true,
+    // Sapper server uses ES2020 optional chaining somewhere in their code,
+    // except ESBuild doesn't seem to handle it fine (https://github.com/evanw/esbuild#javascript-syntax-support),
+    // so we temporarly disable minification for the server only
+    minify: isServer ? false : true,
     sourceMap: false,
     target: 'es2017',
     loaders: {
@@ -80,7 +80,7 @@ export default {
 			}),
 			resolve(),
             commonjs(),
-            optimizer()
+            optimizer(true)
 		],
 		external: Object.keys(pkg.dependencies).concat(
 			require("module").builtinModules || Object.keys(process.binding("natives")), // eslint-disable-line global-require
