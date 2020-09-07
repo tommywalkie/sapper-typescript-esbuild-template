@@ -1,34 +1,18 @@
 {
-    "compilerOptions": {
-        "lib": [
-            "DOM",
-            "ES2017",
-            "WebWorker"
-        ],
-        "target": "es2017",
-        "allowSyntheticDefaultImports": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "importsNotUsedAsValues": "error",
-        "isolatedModules": true,
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "strict": true,
-        "types": [
-            "svelte",
-            "@sapper"
-        ],
-        "typeRoots": [
-            "types"
-        ],
-    },
-    "include": [
-        "src/**/*",
-        "src/node_modules/**/*"
-    ],
+    "extends": "@tsconfig/svelte/tsconfig.json",
+    "include": ["src/**/*"],
     "exclude": [
-        "node_modules/*",
-        "__sapper__/*",
-        "static/*"
+      "node_modules/**/*",
+      "__sapper__/**/*",
+      "public/**/*",
+      "typings/**/*"
     ],
-}
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "lib": ["DOM", "WebWorker"],
+      "types": ["svelte", "node", "@sapper"],
+      "typeRoots": ["./typings", "./node_modules/@types"]
+    }
+  }

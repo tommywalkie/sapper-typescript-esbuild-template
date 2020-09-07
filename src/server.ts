@@ -1,31 +1,22 @@
-import * as sapper from "@sapper/server"; // eslint-disable-line import/no-unresolved
-import compression from "compression";
-import express, { Express } from "express";
-import sirv from "sirv";
-import { createApolloServer } from "./graphql";
+import * as sapper from '@sapper/server'
+import * as compressionProxy from 'compression'
+import * as polkaProxy from 'polka'
+import * as sirvProxy from 'sirv'
 
-const PORT = process.env.PORT; // eslint-disable-line prefer-destructuring
-const mode = process.env.NODE_ENV;
-const dev = mode === "development";
+const compression: any = (<any>compressionProxy).default || compressionProxy
+const polka: any = (<any>polkaProxy).default || polkaProxy
+const sirv: any = (<any>sirvProxy).default || sirvProxy
 
-const createSapperAndApolloServer = async (graphqlPath: string): Promise<Express> => {
-	const app = express();
+const PORT = process.env.PORT
+const mode = process.env.NODE_ENV
+const dev: boolean = mode === "development"
 
-	const apolloServer = await createApolloServer();
+const app = polka()
 
-	apolloServer.applyMiddleware({ app, path: graphqlPath });
-
-	app.use(
-		compression({ threshold: 0 }),
-		sirv("static", { dev }),
-		sapper.middleware(),
-	);
-
-	return app;
-};
-
-createSapperAndApolloServer("/graphql").then((app) => {
-	app.listen(PORT, (err?: any): void => { // eslint-disable-line
-		if (err) console.log("error", err);
-	});
-});
+app.use(
+    compression({ threshold: 0 }),
+    sirv("static", { dev }),
+    sapper.middleware(),
+).listen(PORT, (err: any) => {
+    if (err) console.log('error', err)
+})

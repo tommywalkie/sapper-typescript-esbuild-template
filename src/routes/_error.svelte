@@ -18,12 +18,10 @@
 	h1, h2 {
 		color: #C81E1E;
 	}
-
 	h1 {
 		margin-top: 0.25rem;
 		font-size: 1.5rem;
 	}
-
 	h2 {
 		font-size: 1.125rem;
 	}

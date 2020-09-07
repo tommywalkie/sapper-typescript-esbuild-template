@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals,@typescript-eslint/no-explicit-any */
 import { timestamp, files, shell } from "@sapper/service-worker";
 
 const ASSETS = `cache${timestamp}`;
@@ -45,7 +44,9 @@ self.addEventListener("fetch", <EventType extends FetchEvent>(event: EventType) 
 
 	// always serve static files and bundler-generated assets from cache
 	if (url.host === self.location.host && cached.has(url.pathname)) {
-		event.respondWith(caches.match(event.request) as Promise<Response>);
+		caches.match(event.request).then((match): void => {
+			if (match) event.respondWith(match);
+		});
 		return;
 	}
 
