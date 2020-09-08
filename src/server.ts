@@ -1,11 +1,7 @@
 import * as sapper from '@sapper/server'
-import * as compressionProxy from 'compression'
-import * as polkaProxy from 'polka'
-import * as sirvProxy from 'sirv'
-
-const compression: any = (<any>compressionProxy).default || compressionProxy
-const polka: any = (<any>polkaProxy).default || polkaProxy
-const sirv: any = (<any>sirvProxy).default || sirvProxy
+import compression from 'compression'
+import polka from 'polka'
+import sirv from 'sirv'
 
 const PORT = process.env.PORT
 const mode = process.env.NODE_ENV

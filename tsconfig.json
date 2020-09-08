@@ -2,17 +2,21 @@
     "extends": "@tsconfig/svelte/tsconfig.json",
     "include": ["src/**/*"],
     "exclude": [
-      "node_modules/**/*",
-      "__sapper__/**/*",
-      "public/**/*",
-      "typings/**/*"
+        "node_modules/**/*",
+        "__sapper__/**/*",
+        "public/**/*",
+        "typings/**/*"
     ],
     "compilerOptions": {
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "lib": ["DOM", "WebWorker"],
-      "types": ["svelte", "node", "@sapper"],
-      "typeRoots": ["./typings", "./node_modules/@types"]
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "lib": ["DOM", "WebWorker"],
+        "types": ["svelte", "node", "@sapper"],
+        "typeRoots": [
+            "./typings",
+            "./node_modules/@types",
+            "./node_modules/sirv"
+        ]
     }
-  }
+}
