@@ -12,8 +12,6 @@
         "strict": true,
         "lib": ["DOM", "WebWorker"],
         "types": ["svelte", "node", "sapper/runtime"],
-        "typeRoots": [
-            "./node_modules/@types"
-        ]
+        "typeRoots": [ "./node_modules/@types" ]
     }
 }
