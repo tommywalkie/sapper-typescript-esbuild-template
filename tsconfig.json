@@ -4,19 +4,16 @@
     "exclude": [
         "node_modules/**/*",
         "__sapper__/**/*",
-        "public/**/*",
-        "typings/**/*"
+        "public/**/*"
     ],
     "compilerOptions": {
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "lib": ["DOM", "WebWorker"],
-        "types": ["svelte", "node", "@sapper"],
+        "types": ["svelte", "node", "sapper/runtime"],
         "typeRoots": [
-            "./typings",
-            "./node_modules/@types",
-            "./node_modules/sirv"
+            "./node_modules/@types"
         ]
     }
 }
