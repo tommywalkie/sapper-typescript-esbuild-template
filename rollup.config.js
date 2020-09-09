@@ -19,13 +19,21 @@ const mode = process.env.NODE_ENV
 const dev = mode === 'development'
 const sourcemap = dev ? 'inline' : false
 
-const optimizer = isServer => esbuild({
+const semverRegex = /[0-9]{1,5}/g
+const sapperVersionString = pkg.devDependencies.sapper
+const getNpmPackageVersion = versionString => {
+    const array = versionString.match(semverRegex)
+    return {
+        major: array[0] ? Number(array[0]) : 0,
+        minor: array[1] ? Number(array[1]) : 0,
+        patch: array[2] ? Number(array[2]) : 0
+    }
+}
+const sapperVersion = getNpmPackageVersion(sapperVersionString)
+
+const optimizer = server => esbuild({
     include: /\.[jt]sx?$/,
-    // Sapper server uses ES2020 optional chaining somewhere in their code,
-    // except ESBuild doesn't seem to handle it fine (https://github.com/evanw/esbuild#javascript-syntax-support),
-    // so we temporarly disable minification for the server only
-    minify: isServer ? false : true,
-    sourceMap: false,
+    minify: server ? (sapperVersion.minor >= 28 && sapperVersion.patch > 0) ? false : true : true,
     target: 'es2017',
     loaders: {
         '.json': 'json'
