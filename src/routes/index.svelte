@@ -1,5 +1,5 @@
 <script lang="ts">
-import {a} from './_example'
+import {a} from './example'
 export let dest: string = 'world'
 </script>
 
