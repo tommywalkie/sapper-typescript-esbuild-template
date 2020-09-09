@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 import {a} from './example'
 export let dest: string = 'world'
 </script>
