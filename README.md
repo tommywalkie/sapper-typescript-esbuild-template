@@ -1,6 +1,6 @@
 # Sapper Typescript ESBuild
 
-This is a minimal Sapper project template, inspired by ![@babichjacob](https://github.com/babichjacob)'s ![`sapper-typescript-graphql-template`](https://github.com/babichjacob/sapper-typescript-graphql-template), which uses `@rollup/plugin-typescript` and Babel, which are ditched in favor of `rollup-plugin-esbuild` in this template to increase performance and leave the type-checking job to `tsc`.
+This is a minimal Sapper project template, inspired by [@babichjacob](https://github.com/babichjacob)'s [`sapper-typescript-graphql-template`](https://github.com/babichjacob/sapper-typescript-graphql-template), which uses `@rollup/plugin-typescript` and Babel, which are ditched in favor of `rollup-plugin-esbuild` in this template to increase performance and leave the type-checking job to `tsc`.
 
 ### Getting started
 
