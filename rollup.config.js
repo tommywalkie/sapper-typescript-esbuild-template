@@ -21,19 +21,12 @@ const sourcemap = dev ? 'inline' : false
 
 const semverRegex = /[0-9]{1,5}/g
 const sapperVersionString = pkg.devDependencies.sapper
-const getNpmPackageVersion = versionString => {
-    const array = versionString.match(semverRegex)
-    return {
-        major: array[0] ? Number(array[0]) : 0,
-        minor: array[1] ? Number(array[1]) : 0,
-        patch: array[2] ? Number(array[2]) : 0
-    }
-}
+const getNpmPackageVersion = versionString => versionString.match(semverRegex)
 const sapperVersion = getNpmPackageVersion(sapperVersionString)
 
 const optimizer = server => esbuild({
     include: /\.[jt]sx?$/,
-    minify: server ? (sapperVersion.minor >= 28 && sapperVersion.patch > 0) ? false : true : true,
+    minify: server ? (Number(sapperVersion[1]) >= 28 && Number(sapperVersion[2]) > 0) ? false : true : true,
     target: 'es2017',
     loaders: {
         '.json': 'json'
