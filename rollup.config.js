@@ -7,26 +7,16 @@ import config from 'sapper/config/rollup'
 import sveltePreprocess from 'svelte-preprocess'
 import pkg from './package.json'
 
-const defaults = {
-	script: 'typescript',
-}
-
-const preprocess = [
-	sveltePreprocess({ defaults })
-]
-
+const defaults = { script: 'typescript' }
+const preprocess = [sveltePreprocess({ defaults })]
 const mode = process.env.NODE_ENV
 const dev = mode === 'development'
 const sourcemap = dev ? 'inline' : false
-
-const semverRegex = /[0-9]{1,5}/g
-const sapperVersionString = pkg.devDependencies.sapper
-const getNpmPackageVersion = versionString => versionString.match(semverRegex)
-const sapperVersion = getNpmPackageVersion(sapperVersionString)
+const sapperVersion = pkg.devDependencies.sapper.match(/[0-9]{1,5}/g).map(el => Number(el))
 
 const optimizer = server => esbuild({
     include: /\.[jt]sx?$/,
-    minify: server ? (Number(sapperVersion[1]) >= 28 && Number(sapperVersion[2]) > 0) ? false : true : true,
+    minify: server ? (sapperVersion[1] >= 28 && sapperVersion[2] > 0) ? false : true : true,
     target: 'es2017',
     loaders: {
         '.json': 'json'
