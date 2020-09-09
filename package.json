@@ -5,13 +5,14 @@
     "author": "Tom Bazarnik <tommywalkie@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "dev": "run-p watch-ts sapper:dev",
+        "dev": "run-p watch-ts sapper:dev watch-svelte",
         "build": "sapper build",
         "export": "sapper export",
         "start": "node __sapper__/build",
         "sapper:dev": "sapper dev --port 4000",
         "sapper:export": "sapper export",
-        "watch-ts": "chokidar \"src/**/*.ts\" --silent -c \"tsc --noEmit -p ./tsconfig.json\""
+        "watch-ts": "chokidar \"src/**/*.ts\" --silent -c \"tsc --watch --noEmit -p ./tsconfig.json\"",
+        "watch-svelte": "svelte-check --ignore src/node_modules --watch --output human"
     },
     "dependencies": {
         "compression": "^1.7.1",
@@ -33,6 +34,7 @@
         "rollup-plugin-svelte": "^6.0.0",
         "sapper": "^0.28.5",
         "svelte": "^3.24.1",
+        "svelte-check": "^1.0.38",
         "svelte-preprocess": "^4.2.1",
         "typescript": "^3.9.7"
     }
