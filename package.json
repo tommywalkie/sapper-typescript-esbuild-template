@@ -11,7 +11,7 @@
         "start": "node __sapper__/build",
         "sapper:dev": "sapper dev --port 4000",
         "sapper:export": "sapper export",
-        "watch-ts": "chokidar \"src/**/*.ts\" --silent -c \"tsc --watch --noEmit -p ./tsconfig.json\"",
+        "watch-ts": "chokidar \"src/**/*.ts\" --silent -c \"tsc --noEmit -p ./tsconfig.json\"",
         "watch-svelte": "svelte-check --ignore src/node_modules --watch --output human"
     },
     "dependencies": {
