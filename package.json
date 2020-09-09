@@ -6,13 +6,13 @@
     "license": "MIT",
     "scripts": {
         "dev": "run-p watch-ts sapper:dev watch-svelte",
-        "build": "sapper build",
-        "export": "sapper export",
+        "build": "npm run type-check && sapper build",
+        "export": "npm run type-check && sapper export",
         "start": "node __sapper__/build",
         "sapper:dev": "sapper dev --port 4000",
-        "sapper:export": "sapper export",
         "watch-ts": "chokidar \"src/**/*.ts\" --silent -c \"tsc --noEmit -p ./tsconfig.json\"",
-        "watch-svelte": "svelte-check --ignore src/node_modules --watch --output human"
+        "watch-svelte": "svelte-check --ignore src/node_modules --output human --watch",
+        "type-check" : "tsc --noEmit -p ./tsconfig.json && svelte-check --ignore src/node_modules --output human"
     },
     "dependencies": {
         "compression": "^1.7.1",
