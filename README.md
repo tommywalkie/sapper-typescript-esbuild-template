@@ -19,4 +19,4 @@ npm run export
 
 - Server code minification is disabled if using Sapper `0.28.1` or newer, due to a known issue with ESBuild ([#3](https://github.com/tommywalkie/sapper-typescript-esbuild-template/issues/3)).
 
-- Normal comments inside `<script>` tags in `.svelte` files affect default exports, leading to type errors (`'render' implicitly has return type 'any' because [...]`) with `svelte-check`, which is a known issue ([sveltejs/language-tools#530](https://github.com/sveltejs/language-tools/issues/530)).
+- Normal comments inside `<script>` tags in `.svelte` files are treated as docstrings by `svelte-check`, leading to type errors (`'render' implicitly has return type 'any' because [...]`), except the [first comment](https://github.com/jasonlyu123/language-tools/blob/a7b1b51d1adbb17b07e59e085a057ea90278bd4e/packages/svelte2tsx/src/svelte2tsx/nodes/ExportedNames.ts#L56-L59).
