@@ -2,7 +2,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
 import commonjs from '@rollup/plugin-commonjs'
 import svelte from 'rollup-plugin-svelte'
-import esbuild from 'rollup-plugin-esbuild'
+import esbuild from '@cush/rollup-plugin-esbuild'
 import config from 'sapper/config/rollup'
 import sveltePreprocess from 'svelte-preprocess'
 import pkg from './package.json'
@@ -17,10 +17,7 @@ const sapperVersion = pkg.devDependencies.sapper.match(/[0-9]{1,5}/g).map(el => 
 const optimizer = server => esbuild({
     include: /\.[jt]sx?$/,
     minify: server ? (sapperVersion[1] >= 28 && sapperVersion[2] > 0) ? false : true : true,
-    target: 'es2017',
-    loaders: {
-        '.json': 'json'
-    }
+    target: 'es2017'
 })
 
 const warningIsIgnored = (warning) => warning.message.includes(
@@ -55,10 +52,8 @@ export default {
 	},
 
 	server: {
-        input: {
-            server: config.server.input().server.replace(/\.js$/, '.ts')
-        },
-		output: { ...config.server.output(), sourcemap },
+        input: config.server.input().server.replace(/\.js$/, '.ts'),
+		output: config.server.output(),
 		plugins: [
 			replace({
 				"process.browser": false,
