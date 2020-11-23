@@ -27,7 +27,7 @@
         "@types/compression": "^1.7.0",
         "@types/polka": "^0.5.1",
         "chokidar-cli": "^2.1.0",
-        "esbuild": "0.6.33",
+        "esbuild": "^0.8.12",
         "npm-run-all": "^4.1.5",
         "rollup": "^2.33.3",
         "rollup-plugin-esbuild": "^2.5.2",
